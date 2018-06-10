@@ -16,5 +16,19 @@ namespace NumericMethod
         {
             InitializeComponent();
         }
+
+        private void wczytajZPlikuToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            btnLosuj.Visible = true;
+            Nud1.Visible = true;
+            nud2.Visible = true;
+            nudIle.Visible = true;
+
+        }
     }
 }
