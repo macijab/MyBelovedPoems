@@ -33,8 +33,11 @@
             this.wczytajZPlikuToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.wpiszToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnOblicz = new System.Windows.Forms.Button();
             this.btnWczytaj = new System.Windows.Forms.Button();
+            this.btnUsun = new System.Windows.Forms.Button();
             this.lblY = new System.Windows.Forms.Label();
+            this.btnEdytuj = new System.Windows.Forms.Button();
             this.lblX = new System.Windows.Forms.Label();
             this.btnDodaj = new System.Windows.Forms.Button();
             this.btnLosuj = new System.Windows.Forms.Button();
@@ -48,20 +51,16 @@
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.dgvX = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgvY = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.btnEdytuj = new System.Windows.Forms.Button();
-            this.btnUsun = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.btnOblicz = new System.Windows.Forms.Button();
-            this.dataGridView2 = new System.Windows.Forms.DataGridView();
-            this.colN = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colCalka = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.menuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudIle)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nud2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Nud1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
+            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -100,7 +99,11 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.btnOblicz);
+            this.groupBox1.Controls.Add(this.btnWczytaj);
+            this.groupBox1.Controls.Add(this.btnUsun);
             this.groupBox1.Controls.Add(this.lblY);
+            this.groupBox1.Controls.Add(this.btnEdytuj);
             this.groupBox1.Controls.Add(this.lblX);
             this.groupBox1.Controls.Add(this.btnDodaj);
             this.groupBox1.Controls.Add(this.btnLosuj);
@@ -114,20 +117,38 @@
             this.groupBox1.Controls.Add(this.dataGridView1);
             this.groupBox1.Location = new System.Drawing.Point(22, 44);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(483, 204);
+            this.groupBox1.Size = new System.Drawing.Size(495, 316);
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "PktWejściowe";
             // 
+            // btnOblicz
+            // 
+            this.btnOblicz.Location = new System.Drawing.Point(246, 241);
+            this.btnOblicz.Name = "btnOblicz";
+            this.btnOblicz.Size = new System.Drawing.Size(75, 34);
+            this.btnOblicz.TabIndex = 6;
+            this.btnOblicz.Text = "oblicz";
+            this.btnOblicz.UseVisualStyleBackColor = true;
+            // 
             // btnWczytaj
             // 
-            this.btnWczytaj.Location = new System.Drawing.Point(304, 203);
+            this.btnWczytaj.Location = new System.Drawing.Point(288, 122);
             this.btnWczytaj.Name = "btnWczytaj";
             this.btnWczytaj.Size = new System.Drawing.Size(195, 71);
             this.btnWczytaj.TabIndex = 12;
             this.btnWczytaj.Text = "wczytaj";
             this.btnWczytaj.UseVisualStyleBackColor = true;
             this.btnWczytaj.Visible = false;
+            // 
+            // btnUsun
+            // 
+            this.btnUsun.Location = new System.Drawing.Point(135, 241);
+            this.btnUsun.Name = "btnUsun";
+            this.btnUsun.Size = new System.Drawing.Size(75, 33);
+            this.btnUsun.TabIndex = 4;
+            this.btnUsun.Text = "Usun";
+            this.btnUsun.UseVisualStyleBackColor = true;
             // 
             // lblY
             // 
@@ -138,6 +159,15 @@
             this.lblY.TabIndex = 11;
             this.lblY.Text = "Y";
             this.lblY.Visible = false;
+            // 
+            // btnEdytuj
+            // 
+            this.btnEdytuj.Location = new System.Drawing.Point(27, 241);
+            this.btnEdytuj.Name = "btnEdytuj";
+            this.btnEdytuj.Size = new System.Drawing.Size(75, 33);
+            this.btnEdytuj.TabIndex = 3;
+            this.btnEdytuj.Text = "Edytuj";
+            this.btnEdytuj.UseVisualStyleBackColor = true;
             // 
             // lblX
             // 
@@ -151,7 +181,7 @@
             // 
             // btnDodaj
             // 
-            this.btnDodaj.Location = new System.Drawing.Point(239, 150);
+            this.btnDodaj.Location = new System.Drawing.Point(286, 122);
             this.btnDodaj.Name = "btnDodaj";
             this.btnDodaj.Size = new System.Drawing.Size(173, 71);
             this.btnDodaj.TabIndex = 9;
@@ -241,8 +271,9 @@
             this.dataGridView1.Location = new System.Drawing.Point(6, 21);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 24;
-            this.dataGridView1.Size = new System.Drawing.Size(250, 155);
+            this.dataGridView1.Size = new System.Drawing.Size(248, 214);
             this.dataGridView1.TabIndex = 0;
+            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
             // dgvX
             // 
@@ -254,75 +285,39 @@
             this.dgvY.HeaderText = "Y";
             this.dgvY.Name = "dgvY";
             // 
-            // btnEdytuj
+            // textBox1
             // 
-            this.btnEdytuj.Location = new System.Drawing.Point(22, 272);
-            this.btnEdytuj.Name = "btnEdytuj";
-            this.btnEdytuj.Size = new System.Drawing.Size(75, 33);
-            this.btnEdytuj.TabIndex = 3;
-            this.btnEdytuj.Text = "Edytuj";
-            this.btnEdytuj.UseVisualStyleBackColor = true;
+            this.textBox1.Location = new System.Drawing.Point(236, 106);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(146, 22);
+            this.textBox1.TabIndex = 3;
             // 
-            // btnUsun
+            // label1
             // 
-            this.btnUsun.Location = new System.Drawing.Point(116, 272);
-            this.btnUsun.Name = "btnUsun";
-            this.btnUsun.Size = new System.Drawing.Size(75, 33);
-            this.btnUsun.TabIndex = 4;
-            this.btnUsun.Text = "Usun";
-            this.btnUsun.UseVisualStyleBackColor = true;
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(56, 111);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(46, 17);
+            this.label1.TabIndex = 4;
+            this.label1.Text = "label1";
             // 
-            // button3
+            // groupBox2
             // 
-            this.button3.Location = new System.Drawing.Point(229, 271);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(75, 34);
-            this.button3.TabIndex = 5;
-            this.button3.Text = "Zapisz";
-            this.button3.UseVisualStyleBackColor = true;
-            // 
-            // btnOblicz
-            // 
-            this.btnOblicz.Location = new System.Drawing.Point(359, 271);
-            this.btnOblicz.Name = "btnOblicz";
-            this.btnOblicz.Size = new System.Drawing.Size(75, 34);
-            this.btnOblicz.TabIndex = 6;
-            this.btnOblicz.Text = "oblicz";
-            this.btnOblicz.UseVisualStyleBackColor = true;
-            // 
-            // dataGridView2
-            // 
-            this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView2.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.colN,
-            this.colCalka});
-            this.dataGridView2.Location = new System.Drawing.Point(58, 311);
-            this.dataGridView2.Name = "dataGridView2";
-            this.dataGridView2.RowTemplate.Height = 24;
-            this.dataGridView2.Size = new System.Drawing.Size(399, 150);
-            this.dataGridView2.TabIndex = 7;
-            // 
-            // colN
-            // 
-            this.colN.HeaderText = "N";
-            this.colN.Name = "colN";
-            // 
-            // colCalka
-            // 
-            this.colCalka.HeaderText = "Calka";
-            this.colCalka.Name = "colCalka";
+            this.groupBox2.Controls.Add(this.label1);
+            this.groupBox2.Controls.Add(this.textBox1);
+            this.groupBox2.Location = new System.Drawing.Point(22, 367);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(459, 144);
+            this.groupBox2.TabIndex = 3;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "groupBox2";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(517, 523);
-            this.Controls.Add(this.btnWczytaj);
-            this.Controls.Add(this.dataGridView2);
-            this.Controls.Add(this.btnOblicz);
-            this.Controls.Add(this.button3);
-            this.Controls.Add(this.btnUsun);
-            this.Controls.Add(this.btnEdytuj);
+            this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
@@ -337,7 +332,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.nud2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Nud1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -367,11 +363,10 @@
         private System.Windows.Forms.Button btnWczytaj;
         private System.Windows.Forms.Button btnEdytuj;
         private System.Windows.Forms.Button btnUsun;
-        private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button btnOblicz;
-        private System.Windows.Forms.DataGridView dataGridView2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colN;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCalka;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.GroupBox groupBox2;
     }
 }
 

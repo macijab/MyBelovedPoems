@@ -25,11 +25,9 @@ namespace NumericMethod
         private void UpdateGrid()
         {
             if (funkcja != null)
-            {
-                //1. Utwórz obiekt klasy DataTable o nazwie ewidencja
-                zestawFunkcji = new DataTable("Punkty Funkcji");
-                //2. Utwórz obiekty DataColumn odpowiadające polom Car:
-                DataColumn x = new DataColumn("x");
+            { 
+                zestawFunkcji = new DataTable("Punkty Funkcji");//1. Utwórz obiekt klasy DataTable
+                DataColumn x = new DataColumn("x");// utworzenie kolumny na argumenty
                 DataColumn y = new DataColumn("y");
             //3. Dodaj kolumny do tabeli danych
                 zestawFunkcji.Columns.Add(x);
@@ -123,6 +121,11 @@ namespace NumericMethod
             {
                 
             }
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }
