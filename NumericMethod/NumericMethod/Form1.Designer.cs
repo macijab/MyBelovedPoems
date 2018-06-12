@@ -33,11 +33,11 @@
             this.wczytajZPlikuToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.wpiszToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.btnOblicz = new System.Windows.Forms.Button();
+            this.btnSortuj = new System.Windows.Forms.Button();
+            this.btnWyczysc = new System.Windows.Forms.Button();
             this.btnWczytaj = new System.Windows.Forms.Button();
             this.btnUsun = new System.Windows.Forms.Button();
             this.lblY = new System.Windows.Forms.Label();
-            this.btnEdytuj = new System.Windows.Forms.Button();
             this.lblX = new System.Windows.Forms.Label();
             this.btnDodaj = new System.Windows.Forms.Button();
             this.btnLosuj = new System.Windows.Forms.Button();
@@ -49,11 +49,12 @@
             this.nud2 = new System.Windows.Forms.NumericUpDown();
             this.Nud1 = new System.Windows.Forms.NumericUpDown();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.btnOblicz = new System.Windows.Forms.Button();
             this.txtWynikCalkowania = new System.Windows.Forms.TextBox();
             this.lblWynikCalkowania = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.lblDokladnosc = new System.Windows.Forms.Label();
+            this.nudLP = new System.Windows.Forms.NumericUpDown();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.menuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -62,7 +63,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.Nud1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupBox2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudLP)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -101,10 +102,11 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.btnSortuj);
+            this.groupBox1.Controls.Add(this.btnWyczysc);
             this.groupBox1.Controls.Add(this.btnWczytaj);
             this.groupBox1.Controls.Add(this.btnUsun);
             this.groupBox1.Controls.Add(this.lblY);
-            this.groupBox1.Controls.Add(this.btnEdytuj);
             this.groupBox1.Controls.Add(this.lblX);
             this.groupBox1.Controls.Add(this.btnDodaj);
             this.groupBox1.Controls.Add(this.btnLosuj);
@@ -122,15 +124,27 @@
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "PktWejściowe";
+            this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
             // 
-            // btnOblicz
+            // btnSortuj
             // 
-            this.btnOblicz.Location = new System.Drawing.Point(179, 55);
-            this.btnOblicz.Name = "btnOblicz";
-            this.btnOblicz.Size = new System.Drawing.Size(75, 34);
-            this.btnOblicz.TabIndex = 6;
-            this.btnOblicz.Text = "oblicz";
-            this.btnOblicz.UseVisualStyleBackColor = true;
+            this.btnSortuj.Location = new System.Drawing.Point(245, 244);
+            this.btnSortuj.Name = "btnSortuj";
+            this.btnSortuj.Size = new System.Drawing.Size(83, 31);
+            this.btnSortuj.TabIndex = 14;
+            this.btnSortuj.Text = "Sortuj";
+            this.btnSortuj.UseVisualStyleBackColor = true;
+            this.btnSortuj.Click += new System.EventHandler(this.btnSortuj_Click);
+            // 
+            // btnWyczysc
+            // 
+            this.btnWyczysc.Location = new System.Drawing.Point(125, 243);
+            this.btnWyczysc.Name = "btnWyczysc";
+            this.btnWyczysc.Size = new System.Drawing.Size(75, 32);
+            this.btnWyczysc.TabIndex = 13;
+            this.btnWyczysc.Text = "Wyczysc";
+            this.btnWyczysc.UseVisualStyleBackColor = true;
+            this.btnWyczysc.Click += new System.EventHandler(this.btnWyczysc_Click);
             // 
             // btnWczytaj
             // 
@@ -145,12 +159,13 @@
             // 
             // btnUsun
             // 
-            this.btnUsun.Location = new System.Drawing.Point(135, 241);
+            this.btnUsun.Location = new System.Drawing.Point(17, 242);
             this.btnUsun.Name = "btnUsun";
             this.btnUsun.Size = new System.Drawing.Size(75, 33);
             this.btnUsun.TabIndex = 4;
             this.btnUsun.Text = "Usun";
             this.btnUsun.UseVisualStyleBackColor = true;
+            this.btnUsun.Click += new System.EventHandler(this.btnUsun_Click);
             // 
             // lblY
             // 
@@ -161,15 +176,6 @@
             this.lblY.TabIndex = 11;
             this.lblY.Text = "Y";
             this.lblY.Visible = false;
-            // 
-            // btnEdytuj
-            // 
-            this.btnEdytuj.Location = new System.Drawing.Point(27, 241);
-            this.btnEdytuj.Name = "btnEdytuj";
-            this.btnEdytuj.Size = new System.Drawing.Size(75, 33);
-            this.btnEdytuj.TabIndex = 3;
-            this.btnEdytuj.Text = "Edytuj";
-            this.btnEdytuj.UseVisualStyleBackColor = true;
             // 
             // lblX
             // 
@@ -276,6 +282,16 @@
             this.dataGridView1.TabIndex = 0;
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
+            // btnOblicz
+            // 
+            this.btnOblicz.Location = new System.Drawing.Point(179, 55);
+            this.btnOblicz.Name = "btnOblicz";
+            this.btnOblicz.Size = new System.Drawing.Size(75, 34);
+            this.btnOblicz.TabIndex = 6;
+            this.btnOblicz.Text = "oblicz";
+            this.btnOblicz.UseVisualStyleBackColor = true;
+            this.btnOblicz.Click += new System.EventHandler(this.btnOblicz_Click);
+            // 
             // txtWynikCalkowania
             // 
             this.txtWynikCalkowania.Location = new System.Drawing.Point(236, 106);
@@ -295,7 +311,7 @@
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.lblDokladnosc);
-            this.groupBox2.Controls.Add(this.numericUpDown1);
+            this.groupBox2.Controls.Add(this.nudLP);
             this.groupBox2.Controls.Add(this.btnOblicz);
             this.groupBox2.Controls.Add(this.lblWynikCalkowania);
             this.groupBox2.Controls.Add(this.txtWynikCalkowania);
@@ -306,13 +322,6 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Wyniki";
             // 
-            // numericUpDown1
-            // 
-            this.numericUpDown1.Location = new System.Drawing.Point(300, 22);
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(120, 22);
-            this.numericUpDown1.TabIndex = 7;
-            // 
             // lblDokladnosc
             // 
             this.lblDokladnosc.AutoSize = true;
@@ -321,6 +330,13 @@
             this.lblDokladnosc.Size = new System.Drawing.Size(82, 17);
             this.lblDokladnosc.TabIndex = 8;
             this.lblDokladnosc.Text = "Dokładność";
+            // 
+            // nudLP
+            // 
+            this.nudLP.Location = new System.Drawing.Point(300, 22);
+            this.nudLP.Name = "nudLP";
+            this.nudLP.Size = new System.Drawing.Size(120, 22);
+            this.nudLP.TabIndex = 7;
             // 
             // openFileDialog1
             // 
@@ -348,7 +364,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudLP)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -370,19 +386,20 @@
         private System.Windows.Forms.Label lblZakres;
         private System.Windows.Forms.NumericUpDown nud2;
         private System.Windows.Forms.NumericUpDown Nud1;
-        private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Label lblY;
         private System.Windows.Forms.Label lblX;
         private System.Windows.Forms.Button btnWczytaj;
-        private System.Windows.Forms.Button btnEdytuj;
         private System.Windows.Forms.Button btnUsun;
         private System.Windows.Forms.Button btnOblicz;
         private System.Windows.Forms.TextBox txtWynikCalkowania;
         private System.Windows.Forms.Label lblWynikCalkowania;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Label lblDokladnosc;
-        private System.Windows.Forms.NumericUpDown numericUpDown1;
+        private System.Windows.Forms.NumericUpDown nudLP;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.Button btnWyczysc;
+        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.Button btnSortuj;
     }
 }
 

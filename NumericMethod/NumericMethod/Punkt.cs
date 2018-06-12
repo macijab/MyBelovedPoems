@@ -36,5 +36,9 @@ namespace NumericMethod
             this.x = x;
             this.y = y;
         }
+        public override string ToString()
+        {
+            return Convert.ToString(x) + "," + Convert.ToString(y);
+        }
     }
 }
