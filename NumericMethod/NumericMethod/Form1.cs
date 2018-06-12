@@ -21,7 +21,6 @@ namespace NumericMethod
             InitializeComponent();
             funkcja = new ArrayList();
         }
-
         private void UpdateGrid()
         {
             if (funkcja != null)
@@ -29,24 +28,19 @@ namespace NumericMethod
                 zestawFunkcji = new DataTable("Punkty Funkcji");//1. Utwórz obiekt klasy DataTable
                 DataColumn x = new DataColumn("x");// utworzenie kolumny na argumenty
                 DataColumn y = new DataColumn("y");
-            //3. Dodaj kolumny do tabeli danych
-                zestawFunkcji.Columns.Add(x);
-                zestawFunkcji.Columns.Add(y);
-                //i analogicznie dodaj pozostałe kolumny
-                //4. Wykonaj iteracje po elementach listy aby utworzyć wiersze:
-                //(Dla obiektów c klasy Car w kolekcji cars)
-                foreach (Punkt p in funkcja)
+                zestawFunkcji.Columns.Add(x);    //3. Dodanie kolumny do tabeli danych
+                zestawFunkcji.Columns.Add(y);               
+                
+                foreach (Punkt p in funkcja)//4. Wykonaj iteracje po elementach listy aby utworzyć wiersze: (Dla obiektów p klasy Punkt w kolekcji cars)
                 {
                     DataRow wiersz; //wiersz rekordem danych pojazdu
                     wiersz = zestawFunkcji.NewRow();
                     wiersz["x"] = p.getX();
                     wiersz["y"] = p.getY();
-                    //i analogicznie przypisz dane do pozostałych kolumn wiersza.
-                    //Dodaj wiersz (tzn. rekord danych do ewidencji:
-                    zestawFunkcji.Rows.Add(wiersz);
+                    zestawFunkcji.Rows.Add(wiersz);//Dodanie wiersza (tzn. rekord danych do ewidencji:
                 }
-                //5. Przypisz tą tablicę danych do kontrolki dataGridView1:
-                dataGridView1.DataSource = zestawFunkcji;
+                
+                dataGridView1.DataSource = zestawFunkcji;//5. Przypisz tą tablicę danych do kontrolki dataGridView1:
             }
         }
 
@@ -117,15 +111,76 @@ namespace NumericMethod
         private void btnLosuj_Click(object sender, EventArgs e)
         {
             Random r1 = new Random();
-            for(int i = 0; i < (int)nudIle.Value; i++)
+            double od = Convert.ToDouble(Nud1.Value);
+            double doo = Convert.ToDouble(nud2.Value);
+            Double a = 0;
+            Double b = 0;
+            Punkt p1 = new Punkt(a, b);
+            if (funkcja != null)
             {
-                
+                funkcja.Clear(); //czyści listę cars
             }
+            if (zestawFunkcji != null)
+            {
+                zestawFunkcji.Clear(); //czyści tablicę ewidencja
+            }
+            if (funkcja == null)
+            {
+                a = (r1.NextDouble() * (doo - od)) + od;
+                b = (r1.NextDouble() * (doo - od)) + od;
+                p1.setXY(a, b);
+                funkcja.Add(p1);
+            }
+            else
+            /*{
+                while (Convert.ToInt32(nudIle.Value) < funkcja.Count)
+                {
+                    a = (r1.NextDouble() * (doo - od)) + od;
+                    foreach (Punkt p2 in funkcja)
+                    {
+                        if (p2.getX() == a)
+                        {
+                            continue;
+                        }
+                        else
+                        {
+                            b = (r1.NextDouble() * (doo - od)) + od;
+                            p1.setXY(a, b);
+                            funkcja.Add(p1);
+                        }
+                    }
+                }
+            }*/
+            UpdateGrid();
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
+        }
+
+        private void btnWczytaj_Click(object sender, EventArgs e)
+        {
+            if (funkcja != null)
+            {
+                funkcja.Clear(); //czyści listę cars
+            }
+            if (zestawFunkcji != null)
+            {
+                zestawFunkcji.Clear(); //czyści tablicę ewidencja
+            }
+            string[] rekord = new string[2]; //rekord danych zapisanych w wierszu pliku
+            openFileDialog1.Filter = "Pliki tekstowe (*.txt)|*.txt";
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                //Czytaj kolejne wiersze pliku i zapisuj je do kolekcji cars:
+                foreach (string line in File.ReadLines(openFileDialog1.FileName))
+                {
+                    rekord = line.Split(','); //przecinek rozdziela dane w wierszu
+                    funkcja.Add(new Punkt(Convert.ToDouble(rekord[0]), Convert.ToDouble(rekord[1])));
+                }
+                UpdateGrid(); //uaktualnij tabelę
+            }
         }
     }
 }

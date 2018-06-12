@@ -10,6 +10,11 @@ namespace NumericMethod
     {
         private double x;
         private double y;
+        public Punkt(double x, double y)
+        {
+            this.x = x;
+            this.y = y;
+        }
         public double getX()
         {
             return this.x;
@@ -25,6 +30,11 @@ namespace NumericMethod
         public void setY(double a)
         {
             this.y = a;
+        }
+        public void setXY(double x, double y)
+        {
+            this.x = x;
+            this.y = y;
         }
     }
 }

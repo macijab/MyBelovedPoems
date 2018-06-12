@@ -49,11 +49,12 @@
             this.nud2 = new System.Windows.Forms.NumericUpDown();
             this.Nud1 = new System.Windows.Forms.NumericUpDown();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.dgvX = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvY = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
+            this.txtWynikCalkowania = new System.Windows.Forms.TextBox();
+            this.lblWynikCalkowania = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+            this.lblDokladnosc = new System.Windows.Forms.Label();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.menuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudIle)).BeginInit();
@@ -61,6 +62,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.Nud1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -99,7 +101,6 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.btnOblicz);
             this.groupBox1.Controls.Add(this.btnWczytaj);
             this.groupBox1.Controls.Add(this.btnUsun);
             this.groupBox1.Controls.Add(this.lblY);
@@ -124,7 +125,7 @@
             // 
             // btnOblicz
             // 
-            this.btnOblicz.Location = new System.Drawing.Point(246, 241);
+            this.btnOblicz.Location = new System.Drawing.Point(179, 55);
             this.btnOblicz.Name = "btnOblicz";
             this.btnOblicz.Size = new System.Drawing.Size(75, 34);
             this.btnOblicz.TabIndex = 6;
@@ -133,13 +134,14 @@
             // 
             // btnWczytaj
             // 
-            this.btnWczytaj.Location = new System.Drawing.Point(288, 122);
+            this.btnWczytaj.Location = new System.Drawing.Point(284, 122);
             this.btnWczytaj.Name = "btnWczytaj";
             this.btnWczytaj.Size = new System.Drawing.Size(195, 71);
             this.btnWczytaj.TabIndex = 12;
             this.btnWczytaj.Text = "wczytaj";
             this.btnWczytaj.UseVisualStyleBackColor = true;
             this.btnWczytaj.Visible = false;
+            this.btnWczytaj.Click += new System.EventHandler(this.btnWczytaj_Click);
             // 
             // btnUsun
             // 
@@ -265,9 +267,6 @@
             // dataGridView1
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dgvX,
-            this.dgvY});
             this.dataGridView1.Location = new System.Drawing.Point(6, 21);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 24;
@@ -275,42 +274,55 @@
             this.dataGridView1.TabIndex = 0;
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
-            // dgvX
+            // txtWynikCalkowania
             // 
-            this.dgvX.HeaderText = "X";
-            this.dgvX.Name = "dgvX";
+            this.txtWynikCalkowania.Location = new System.Drawing.Point(236, 106);
+            this.txtWynikCalkowania.Name = "txtWynikCalkowania";
+            this.txtWynikCalkowania.Size = new System.Drawing.Size(146, 22);
+            this.txtWynikCalkowania.TabIndex = 3;
             // 
-            // dgvY
+            // lblWynikCalkowania
             // 
-            this.dgvY.HeaderText = "Y";
-            this.dgvY.Name = "dgvY";
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(236, 106);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(146, 22);
-            this.textBox1.TabIndex = 3;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(56, 111);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(46, 17);
-            this.label1.TabIndex = 4;
-            this.label1.Text = "label1";
+            this.lblWynikCalkowania.AutoSize = true;
+            this.lblWynikCalkowania.Location = new System.Drawing.Point(56, 111);
+            this.lblWynikCalkowania.Name = "lblWynikCalkowania";
+            this.lblWynikCalkowania.Size = new System.Drawing.Size(121, 17);
+            this.lblWynikCalkowania.TabIndex = 4;
+            this.lblWynikCalkowania.Text = "Wynik Całkowania";
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.label1);
-            this.groupBox2.Controls.Add(this.textBox1);
+            this.groupBox2.Controls.Add(this.lblDokladnosc);
+            this.groupBox2.Controls.Add(this.numericUpDown1);
+            this.groupBox2.Controls.Add(this.btnOblicz);
+            this.groupBox2.Controls.Add(this.lblWynikCalkowania);
+            this.groupBox2.Controls.Add(this.txtWynikCalkowania);
             this.groupBox2.Location = new System.Drawing.Point(22, 367);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(459, 144);
             this.groupBox2.TabIndex = 3;
             this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "groupBox2";
+            this.groupBox2.Text = "Wyniki";
+            // 
+            // numericUpDown1
+            // 
+            this.numericUpDown1.Location = new System.Drawing.Point(300, 22);
+            this.numericUpDown1.Name = "numericUpDown1";
+            this.numericUpDown1.Size = new System.Drawing.Size(120, 22);
+            this.numericUpDown1.TabIndex = 7;
+            // 
+            // lblDokladnosc
+            // 
+            this.lblDokladnosc.AutoSize = true;
+            this.lblDokladnosc.Location = new System.Drawing.Point(56, 27);
+            this.lblDokladnosc.Name = "lblDokladnosc";
+            this.lblDokladnosc.Size = new System.Drawing.Size(82, 17);
+            this.lblDokladnosc.TabIndex = 8;
+            this.lblDokladnosc.Text = "Dokładność";
+            // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.FileName = "openFileDialog1";
             // 
             // Form1
             // 
@@ -334,6 +346,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -356,17 +369,18 @@
         private System.Windows.Forms.NumericUpDown nud2;
         private System.Windows.Forms.NumericUpDown Nud1;
         private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgvX;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgvY;
         private System.Windows.Forms.Label lblY;
         private System.Windows.Forms.Label lblX;
         private System.Windows.Forms.Button btnWczytaj;
         private System.Windows.Forms.Button btnEdytuj;
         private System.Windows.Forms.Button btnUsun;
         private System.Windows.Forms.Button btnOblicz;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox txtWynikCalkowania;
+        private System.Windows.Forms.Label lblWynikCalkowania;
         private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.Label lblDokladnosc;
+        private System.Windows.Forms.NumericUpDown numericUpDown1;
+        private System.Windows.Forms.OpenFileDialog openFileDialog1;
     }
 }
 
