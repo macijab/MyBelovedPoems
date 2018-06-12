@@ -25,7 +25,7 @@ namespace NumericMethod
         }
         private void UpdateGrid()
         {
-            if (funkcja.Count != 0)
+            if (funkcja != null)
             {
                 zestawFunkcji = new DataTable("Punkty Funkcji");//1. Utwórz obiekt klasy DataTable
                 DataColumn x = new DataColumn("x");// utworzenie kolumny na argumenty
@@ -149,8 +149,8 @@ namespace NumericMethod
                     p1.setXY(a, b);
                     funkcja.Add(item: p1);
                 }
-                UpdateGrid();
             }
+            UpdateGrid();
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -253,14 +253,13 @@ namespace NumericMethod
 
         private void btnSortuj_Click(object sender, EventArgs e)
         {
-            Punkt bufor = new Punkt(0.0,0.0);
             for(int i = 1; i < funkcja.Count-1; i++)
             {
-                for(int j = funkcja.Count-1; j > 1; j--)
+                for(int j = funkcja.Count-1; j >= 1; j--)
                 {
-                    if(funkcja[j].getX() < funkcja[j - 1].getX())
+                    if(funkcja[j].getX() > funkcja[j - 1].getX())
                     {
-                        bufor = funkcja[j];
+                        Punkt bufor = new Punkt(0.0, 0.0); bufor = funkcja[j-1];
                         funkcja[j - 1] = funkcja[j];
                         funkcja[j] = bufor;
                     }
