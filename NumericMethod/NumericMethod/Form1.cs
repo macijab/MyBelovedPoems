@@ -163,21 +163,38 @@ namespace NumericMethod
         {
             if (funkcja != null)
             {
-                funkcja.Clear(); //czyści listę cars
+                funkcja.Clear(); //czyści listę funkcja
             }
             if (zestawFunkcji != null)
             {
-                zestawFunkcji.Clear(); //czyści tablicę ewidencja
+                zestawFunkcji.Clear(); //czyści tablicę zestawFunkcji
             }
             string[] rekord = new string[2]; //rekord danych zapisanych w wierszu pliku
             openFileDialog1.Filter = "Pliki tekstowe (*.txt)|*.txt";
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
-                //Czytaj kolejne wiersze pliku i zapisuj je do kolekcji cars:
+                //Czytaj kolejne wiersze pliku i zapisuj je do kolekcji funkcja:
                 foreach (string line in File.ReadLines(openFileDialog1.FileName))
                 {
                     rekord = line.Split(','); //przecinek rozdziela dane w wierszu
-                    funkcja.Add(new Punkt(Convert.ToDouble(rekord[0]), Convert.ToDouble(rekord[1])));
+                    if (funkcja == null)
+                    {
+                        funkcja.Add(new Punkt(Convert.ToDouble(rekord[0]), Convert.ToDouble(rekord[1])));
+                    }
+                    else
+                    {
+                        foreach(Punkt punkt in funkcja)
+                        {
+                            if (punkt.getX() == Convert.ToDouble(rekord[0]))
+                            {
+                                MessageBox.Show("To nie jest funkcja");
+                            }
+                            else
+                            {
+                                funkcja.Add(new Punkt(Convert.ToDouble(rekord[0]), Convert.ToDouble(rekord[1])));
+                            }
+                        }
+                    }
                 }
                 UpdateGrid(); //uaktualnij tabelę
             }
