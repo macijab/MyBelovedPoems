@@ -14,7 +14,7 @@ namespace NumericMethod
 {
     public partial class Form1 : Form
     {
-        Random r1 = new Random();
+        
         List<Punkt> funkcja = new List<Punkt>();
         private DataTable zestawFunkcji = null;
         public Form1()
@@ -112,8 +112,9 @@ namespace NumericMethod
 
         private void btnLosuj_Click(object sender, EventArgs e)
         {
-            double od = Convert.ToDouble(Nud1.Value);
-            double doo = Convert.ToDouble(nud2.Value);
+            Random r1 = new Random();
+            int od = Convert.ToInt32(Nud1.Value);
+            double doo = Convert.ToInt32(nud2.Value);
             Double a = 0;
             Double b = 0;
             Punkt p1 = new Punkt(a, b);
@@ -125,31 +126,41 @@ namespace NumericMethod
             {
                 zestawFunkcji.Clear(); //czyści tablicę ewidencja
             }
+            //for (int i = od; i <= doo; i++)
+            //{
+
+            //    a = r1.NextDouble();
+            //    Punkt dodawanieLokalnej = new Punkt(Convert.ToInt32(i),a);
+            //    funkcja.Add(dodawanieLokalnej);
+            //}
             if (funkcja.Count == 0)
             {
-                a = (r1.NextDouble() * (doo - od)) + od;
-                b = (r1.NextDouble() * (doo - od)) + od;
+                a = (r1.NextDouble());// * (doo - od)) + od;
+                b = (r1.NextDouble()); //* (doo - od)) + od;
                 p1.setXY(a, b);
                 funkcja.Add(p1);
             }
-            else
+            bool czy = false;
+            while (Convert.ToInt32(nudIle.Value) - 1 > funkcja.Count)
             {
-                while (Convert.ToInt32(nudIle.Value) > funkcja.Count)
+                a = (r1.NextDouble() * (doo - od)) + od;
+                foreach (Punkt p in funkcja)
                 {
-                    a = (r1.NextDouble() * (doo - od)) + od;
-                    foreach (Punkt p2 in funkcja)
+                    if (p.getX() == a)
                     {
-                        if (p2.getX() == a)
-                        {
-                            continue;
-                        }
-
+                        czy = true;
                     }
-                    b = (r1.NextDouble() * (doo - od)) + od;
-                    p1.setXY(a, b);
-                    funkcja.Add(item: p1);
                 }
+                if (czy == true)
+                {
+                    czy = false;
+                    continue;
+                }
+                b = (r1.NextDouble() * (doo - od)) + od;
+                Punkt zmiennaLokalna = new Punkt(a, b);
+                funkcja.Add(zmiennaLokalna);
             }
+
             UpdateGrid();
         }
 
@@ -257,9 +268,10 @@ namespace NumericMethod
             {
                 for(int j = funkcja.Count-1; j >= 1; j--)
                 {
-                    if(funkcja[j].getX() > funkcja[j - 1].getX())
+                    if(funkcja[j].getX() < funkcja[j - 1].getX())
                     {
-                        Punkt bufor = new Punkt(0.0, 0.0); bufor = funkcja[j-1];
+                        Punkt bufor = new Punkt(0.0, 0.0);
+                        bufor = funkcja[j-1];
                         funkcja[j - 1] = funkcja[j];
                         funkcja[j] = bufor;
                     }
@@ -281,7 +293,6 @@ namespace NumericMethod
                 return;
             }
             double suma =0;
-            c1.setWynik(0);
             for(int i = 0; i <= funkcja.Count - 2; i++)
             {
                suma += c1.metodaTrapezów(funkcja[i].getX(), funkcja[i + 1].getX(), funkcja[i].getY(),funkcja[i+1].getY());
