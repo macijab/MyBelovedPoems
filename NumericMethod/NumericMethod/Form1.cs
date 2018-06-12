@@ -14,6 +14,7 @@ namespace NumericMethod
 {
     public partial class Form1 : Form
     {
+        Random r1 = new Random();
         private ArrayList funkcja = null;
         private DataTable zestawFunkcji = null;
         public Form1()
@@ -110,7 +111,6 @@ namespace NumericMethod
 
         private void btnLosuj_Click(object sender, EventArgs e)
         {
-            Random r1 = new Random();
             double od = Convert.ToDouble(Nud1.Value);
             double doo = Convert.ToDouble(nud2.Value);
             Double a = 0;
@@ -124,7 +124,7 @@ namespace NumericMethod
             {
                 zestawFunkcji.Clear(); //czyści tablicę ewidencja
             }
-            if (funkcja == null)
+            if (funkcja.Capacity == 0)
             {
                 a = (r1.NextDouble() * (doo - od)) + od;
                 b = (r1.NextDouble() * (doo - od)) + od;
@@ -132,8 +132,8 @@ namespace NumericMethod
                 funkcja.Add(p1);
             }
             else
-            /*{
-                while (Convert.ToInt32(nudIle.Value) < funkcja.Count)
+            {
+                while (Convert.ToInt32(nudIle.Value) > funkcja.Count)
                 {
                     a = (r1.NextDouble() * (doo - od)) + od;
                     foreach (Punkt p2 in funkcja)
@@ -142,16 +142,14 @@ namespace NumericMethod
                         {
                             continue;
                         }
-                        else
-                        {
-                            b = (r1.NextDouble() * (doo - od)) + od;
-                            p1.setXY(a, b);
-                            funkcja.Add(p1);
-                        }
+
                     }
+                    b = (r1.NextDouble() * (doo - od)) + od;
+                    p1.setXY(a, b);
+                    funkcja.Add(p1);
                 }
-            }*/
-            UpdateGrid();
+                UpdateGrid();
+            }
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -159,7 +157,7 @@ namespace NumericMethod
 
         }
 
-        private void btnWczytaj_Click(object sender, EventArgs e)
+        private void btnWczytaj_Click(object sender, EventArgs e) //wczytywanie z pliku
         {
             if (funkcja != null)
             {
@@ -177,8 +175,7 @@ namespace NumericMethod
                 foreach (string line in File.ReadLines(openFileDialog1.FileName))
                 {
                     rekord = line.Split(','); //przecinek rozdziela dane w wierszu
-                    if (funkcja == null)
-                    {
+                    if (funkcja.Capacity == 0)                    {
                         funkcja.Add(new Punkt(Convert.ToDouble(rekord[0]), Convert.ToDouble(rekord[1])));
                     }
                     else
@@ -188,16 +185,29 @@ namespace NumericMethod
                             if (punkt.getX() == Convert.ToDouble(rekord[0]))
                             {
                                 MessageBox.Show("To nie jest funkcja");
-                            }
-                            else
-                            {
-                                funkcja.Add(new Punkt(Convert.ToDouble(rekord[0]), Convert.ToDouble(rekord[1])));
+                                return;
                             }
                         }
+                        funkcja.Add(new Punkt(Convert.ToDouble(rekord[0]), Convert.ToDouble(rekord[1])));
                     }
                 }
                 UpdateGrid(); //uaktualnij tabelę
             }
+        }
+
+        private void btnDodaj_Click(object sender, EventArgs e)//dodawanie nowego punktu
+        {
+            Punkt p1 = new Punkt(Convert.ToDouble(Nud1.Value), Convert.ToDouble(nud2.Value));
+            foreach (Punkt punkt in funkcja)
+            {
+                if (p1.getX() == punkt.getX())
+                {
+                    MessageBox.Show("Nie może być dwóch takich samych argumentów");
+                    return;
+                }
+            }
+            funkcja.Add(p1);
+            UpdateGrid();
         }
     }
 }
