@@ -8,9 +8,9 @@ namespace NumericMethod
 {
     class Punkt
     {
-        private double x;
-        private double y;
-        public Punkt(double x, double y)
+        private double x;//argument funkcji
+        private double y;//wartość funkcji
+        public Punkt(double x, double y)//konstruktor
         {
             this.x = x;
             this.y = y;
@@ -31,14 +31,11 @@ namespace NumericMethod
         {
             this.y = a;
         }
-        public void setXY(double x, double y)
+        public void setXY(double x, double y)//ustawienie jednocześnie argumentu i wartości
         {
             this.x = x;
             this.y = y;
         }
-        public override string ToString()
-        {
-            return Convert.ToString(x) + "," + Convert.ToString(y);
-        }
+
     }
 }
